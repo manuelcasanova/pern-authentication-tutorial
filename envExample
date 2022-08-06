@@ -2,3 +2,4 @@ DB_USER=nameofuser
 DB_PASSWORD=password
 HOST=nameofhost
 DATABASE=nameofdatabase
+jwtSecret = nameofsecret
