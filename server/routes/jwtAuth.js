@@ -57,6 +57,14 @@ router.post("/register", async(req, res) => {
 router.post("/login", async (req, res) => {
   try {
 
+    //1. Destructure the req.body
+
+    //2. Check if user does not exist (if not, throw error)
+
+    //3. If it exists. Check if incoming password is like db password
+
+    //4. Give them jwt token
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
