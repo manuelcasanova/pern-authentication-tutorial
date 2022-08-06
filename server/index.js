@@ -10,6 +10,9 @@ app.use(cors())
 
 //ROUTES
 
+//Register and login routes
+
+app.use("/auth", require("./routes/jwtAuth"))
 
 
 app.listen(PORT, () => {
