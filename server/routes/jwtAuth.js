@@ -7,24 +7,24 @@ const jwtGenerator = require("../utils/jwtGenerator")
 
 //registering
 
-router.post("/register", async(req, res) => {
+router.post("/register", async (req, res) => {
   try {
 
     //1. Destructure the req.body (name, email, password)
 
-    const {name, email, password} = req.body
+    const { name, email, password } = req.body
 
     //2. Check if user exist (if exists, then throw error)
 
-  const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
-    email
-  ]);
+    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
+      email
+    ]);
 
-  if (user.rows.length !== 0) {
-    return res.status(401).send("Email already exists");
-  } 
-  
-  res.json(user.rows)
+    if (user.rows.length !== 0) {
+      return res.status(401).send("Email already exists");
+    }
+
+    res.json(user.rows)
 
     //3. Bcrypt the password
 
@@ -36,15 +36,15 @@ router.post("/register", async(req, res) => {
     //4. Enter the user in the db
 
     const newUsers = await pool.query(
-      "INSERT INTO users (user_name, user_email, user_password_hash) VALUES ($1, $2, $3)  RETURNING *" [name, email, bcryptPassword] 
+      "INSERT INTO users (user_name, user_email, user_password_hash) VALUES ($1, $2, $3)  RETURNING *"[name, email, bcryptPassword]
     );
 
-      res.json(newUser)
+    res.json(newUser)
     //5. generate our jwt token
 
     const token = jwtGenerator(newUser.rows[0].user_id);
 
-    res.json({token})
+    res.json({ token })
 
   } catch (err) {
     console.error(err.message);
@@ -59,17 +59,17 @@ router.post("/login", async (req, res) => {
 
     //1. Destructure the req.body
 
-    const {email, password} = req.body
+    const { email, password } = req.body
 
     //2. Check if user does not exist (if not, throw error)
 
-const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
-  email
-]);
+    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
+      email
+    ]);
 
-if (user.rows.length === 0) {
-  return res.status(401).json("Wrong email or password");
-}
+    if (user.rows.length === 0) {
+      return res.status(401).json("Wrong email or password");
+    }
 
     //3. If it exists. Check if incoming password is like db password
 
@@ -86,7 +86,7 @@ if (user.rows.length === 0) {
 
     const token = jwtGenerator(usr.rows[0].user_id);
 
-    res.json({token})
+    res.json({ token })
 
   } catch (err) {
     console.error(err.message);
