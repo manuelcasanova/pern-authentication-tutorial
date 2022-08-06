@@ -27,6 +27,11 @@ router.post("/register", async(req, res) => {
 
     //3. Bcrypt the password
 
+    const saltRound = 10;
+    const salt = await bcrypt.genSalt(saltRound);
+
+    const bcryptPassword = bcrypt.hash(password, salt);
+
     //4. Enter the user in the db
 
     //5. generate our jwt token
