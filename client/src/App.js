@@ -16,16 +16,20 @@ function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const useAuth = boolean => {
+    setIsAuthenticated(boolean);
+  };
+
   return (
-    <UserContext.Provider value={{isAuthenticated}}>
+    <UserContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
       <Fragment>
         <Router>
           <div className="container">
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login useAuth = {useAuth} />} />
+              <Route path="/register" element={<Register useAuth = {useAuth}/>} />
               <Route element={<ProtectedRoutes />}>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard useAuth = {useAuth}/>} />
               </Route>
             </Routes>
           </div>
