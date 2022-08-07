@@ -5,6 +5,7 @@ const pool = require("../db")
 const bcrypt = require("bcrypt")
 const jwtGenerator = require("../utils/jwtGenerator")
 const validInfo = require("../middleware/validInfo")
+const authorization = require("../middleware/authorization")
 
 //registering
 
@@ -95,6 +96,17 @@ router.post("/login", validInfo, async (req, res) => {
   }
 })
 
+// Verify consitently the jw token
 
+router.get("/verify", authorization, async (req, res) => {
+  try {
+    res.json(true);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error")
+  }
+})
+
+// Access private information
 
 module.exports = router;
