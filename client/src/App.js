@@ -1,7 +1,7 @@
 import { Fragment, useState, createContext } from 'react';
 import './App.css';
 
-import { BrowserRouter as Router, Routes, Route, Redirect, UNSAFE_RouteContext } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ProtectedRoutes from './components/ProtectedRoutes';
 
 //Components
@@ -14,27 +14,22 @@ export const UserContext = createContext()
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({ loggedIn: false });
 
-  const useAuth = boolean => {
-    setIsAuthenticated(boolean);
-  };
 
   return (
-    <UserContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
-      <Fragment>
+    <UserContext.Provider value={{user, setUser}}>
         <Router>
           <div className="container">
             <Routes>
-              <Route path="/login" element={<Login useAuth = {useAuth} />} />
-              <Route path="/register" element={<Register useAuth = {useAuth}/>} />
-              <Route element={<ProtectedRoutes />}>
-                <Route path="/dashboard" element={<Dashboard useAuth = {useAuth}/>} />
+              <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+              <Route path="/register" element={<Register user={user} setUser={setUser}/>} />
+              <Route element={<ProtectedRoutes user={user} setUser={setUser} />}>
+                <Route path="/dashboard" element={<Dashboard user={user} setUser={setUser}/>} />
               </Route>
             </Routes>
           </div>
         </Router>
-      </Fragment>
     </UserContext.Provider>
 
   );

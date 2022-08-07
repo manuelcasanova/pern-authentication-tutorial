@@ -1,10 +1,16 @@
 import { Fragment } from "react"
 
-export default function Login ({useAuth}) {
+export default function Login ({user, setUser}) {
+
+const login = function () {
+  console.log("login jsx user", user)
+  setUser({ loggedIn: true });
+}
+
   return (
     <Fragment>
     <h1>Login</h1>
-    <button onClick={() => useAuth(true)}>Authenticate</button>
+    <button onClick={() => login()}>Authenticate</button>
   </Fragment>
   )
 }

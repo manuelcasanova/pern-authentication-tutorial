@@ -24,8 +24,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import { UserContext } from "../App";
 
 const useAuth = () => {
-  const { isAuthenticated } = useContext(UserContext);
-  return isAuthenticated;
+  const { user } = useContext(UserContext);
+  return user && user.loggedIn;
 };
 
 export default function ProtectedRoutes () {
