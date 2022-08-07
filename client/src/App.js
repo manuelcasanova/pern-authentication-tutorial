@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Routes, Route, Redirect } from "react-router-dom"
@@ -12,6 +12,9 @@ import Login from './components/Login';
 
 
 function App() {
+
+const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <Fragment>
       <Router>
