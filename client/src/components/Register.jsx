@@ -1,5 +1,9 @@
+import { Fragment } from "react"
+
 export default function Register () {
   return (
-    <div>Register</div>
+    <Fragment>
+    <h1>Register</h1>
+  </Fragment>
   )
 }

@@ -1,5 +1,9 @@
+import { Fragment } from "react"
+
 export default function Dashboard () {
   return (
-    <div>Dashboard</div>
+    <Fragment>
+      <h1>Dashboard</h1>
+    </Fragment>
   )
 }

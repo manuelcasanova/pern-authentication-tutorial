@@ -1,5 +1,9 @@
+import { Fragment } from "react"
+
 export default function Login () {
   return (
-    <div>Login</div>
+    <Fragment>
+    <h1>Login</h1>
+  </Fragment>
   )
 }
