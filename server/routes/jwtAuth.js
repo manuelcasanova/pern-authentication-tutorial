@@ -85,7 +85,7 @@ router.post("/login", validInfo, async (req, res) => {
 
     //4. Give them jwt token
 
-    const token = jwtGenerator(usr.rows[0].user_id);
+    const token = jwtGenerator(user.rows[0].user_id);
 
     res.json({ token })
 
@@ -94,5 +94,7 @@ router.post("/login", validInfo, async (req, res) => {
     res.status(500).send("Server Error");
   }
 })
+
+
 
 module.exports = router;
